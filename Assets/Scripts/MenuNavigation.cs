@@ -61,13 +61,28 @@ public class MenuNavigation : MonoBehaviour
         tutorialCanvas.SetActive(true);
     }
 
+
+    public void ToggleTutorial()
+    {
+        counter = 1;
+        SetPagination();
+        if (tutorialCanvas.activeInHierarchy)
+        {
+            tutorialCanvas.SetActive(false);
+        }
+        else
+        {
+            tutorialCanvas.SetActive(true);
+        }
+    }
+
     private void ChangeMenuText()
     {
-        if(counter < 1)
+        if (counter < 1)
         {
             counter = 1;
         }
-        if(counter > numberOfMenuTexts)
+        if (counter > numberOfMenuTexts)
         {
             counter = numberOfMenuTexts;
         }
@@ -75,7 +90,7 @@ public class MenuNavigation : MonoBehaviour
         {
             case 1:
                 tmpMenuText.text = menuText1;
-                break;   
+                break;
             case 2:
                 tmpMenuText.text = menuText2;
                 break;
@@ -88,7 +103,7 @@ public class MenuNavigation : MonoBehaviour
             case 5:
                 tmpMenuText.text = menuText5;
                 break;
-            default: 
+            default:
                 break;
 
         }
