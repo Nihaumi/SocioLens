@@ -5,12 +5,44 @@ using System.Linq;
 using UnityEngine.Windows.WebCam;
 using System;
 
-//from https://learn.microsoft.com/en-us/windows/mixed-reality/develop/unity/locatable-camera-in-unity
+//Photi Logic from https://learn.microsoft.com/en-us/windows/mixed-reality/develop/unity/locatable-camera-in-unity
 
 public class TakePicture : MonoBehaviour
 {
     private PhotoCapture photoCaptureObject = null;
 
+    //Counter for Toggle Btn
+    private int btnTouchCounter = 0;
+
+    //initially taking photos is enabled
+    private void Start()
+    {
+        StartTakingPhotos();
+    }
+
+    //buttontouched (counter%2 = 1) -> start taking photos
+    //button touched again -> stop taking photos
+    public void TogglePhotoMode()
+    {
+        btnTouchCounter++;
+
+        if(btnTouchCounter%2 == 0)
+        {
+            StartTakingPhotos();
+        }
+        else if (btnTouchCounter % 2 == 1)
+        {
+            StopTakingPhotos();
+        }
+    }
+
+    //triggers TakePhoto every X seconds
+    private void StartTakingPhotos()
+    {
+
+    }
+
+    //when called takes one photo
     public void TakePhoto()
     {
         //creating a PhotoCapture object
