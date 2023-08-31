@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using WebSocketSharp;
+using TMPro;
+using Newtonsoft.Json;
 
 namespace csharp_client
 {
@@ -12,8 +14,8 @@ namespace csharp_client
     {
         //TODO use hololens cam instead of webcam
         public float framecounter = 0.0f;
-        public Text startStopText;
-        public Text cam;
+        public TextMeshPro startStopText;
+        public TextMeshPro camText;
         int currentCamIndex = 0;
         WebCamTexture tex;
         public RawImage display;
@@ -28,7 +30,7 @@ namespace csharp_client
                 currentCamIndex += 1;
                 currentCamIndex %= WebCamTexture.devices.Length;
 
-                if (startStopText != null)
+                if (startStopText.text != null)
                 {
                     StopWebcam();
                     StartStopCam_Clicked();
@@ -49,7 +51,7 @@ namespace csharp_client
                 WebCamDevice device = WebCamTexture.devices[currentCamIndex];
                 tex = new WebCamTexture(device.name);
                 display.texture = tex;
-                cam.text = device.name;
+                camText.text = device.name;
                 tex.Play();
                 startStopText.text = "Stop Camera";
 
