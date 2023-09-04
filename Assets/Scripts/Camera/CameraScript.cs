@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace csharp_client
 {
-
+    
     public class CameraScript : MonoBehaviour
     {
         //TODO use hololens cam instead of webcam
@@ -22,6 +22,9 @@ namespace csharp_client
         WebSocket ws;
         public byte[] mybytes;
 
+        //events
+        public delegate void ONReceive(string data);
+        public static event ONReceive OnReceivedData;
         public void SwapCam_Clicked()
         {
 
@@ -56,11 +59,14 @@ namespace csharp_client
                 startStopText.text = "Stop Camera";
 
                 //open Websocket-Connection
+                
                 ws = new WebSocket("ws://127.0.0.1:8000/ws");
                 ws.OnMessage += (sender, e) => {
                     if (e.IsText)
                     {
+                        //TODO event send to desirializer
                         Debug.Log("SERVER SAYS: " + e.Data);
+                        OnReceivedData(e.Data);
                     }
                     else
                     {
