@@ -45,12 +45,12 @@ public class InfoCardManager : MonoBehaviour
     public void InstantiateInfoCardWithData(InfoCard infoCard)
     {
         Debug.Log("I Am called with infocard: " + infoCard.id);
-        testCard = infoCard;
-        InstantiateInfoCard();
+        //InstantiateInfoCard();
         Debug.Log("I Am called with infocard: " + infoCard.firstName);
         if (infoCard != null)
         {
             Debug.Log("received infocard: " + infoCard.firstName + "" + infoCard.lastName);
+            card = Instantiate(infoCardPrefab, infoCardContainer);
             cardScript.SetInfo(infoCard.firstName + "" + infoCard.lastName, infoCard.role, infoCard.pathToImage);
         }
         else
