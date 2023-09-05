@@ -10,13 +10,8 @@ public class JSONDeserializer : MonoBehaviour
     //deserialize json stuff
 
     //event
-    public delegate void InfoCard(string data);
-    public static event InfoCard OnFirstName;
-    public static event InfoCard OnLastName;
-    public static event InfoCard OnRole;
-    public static event InfoCard OnPlace;
-    public static event InfoCard OnID;
-    public static event InfoCard OnPicturePath;
+    public delegate void InfoCard(InfoCardManager.InfoCard infoCard);
+    public static event InfoCard OnInfoCardInitialized;
 
 
     private void OnEnable()
@@ -27,7 +22,9 @@ public class JSONDeserializer : MonoBehaviour
     {
         CameraScript.OnReceivedData -= HandleDataInput;
     }
-    public void OutputReceivedData(string data)
+
+    //deserializes JSON string and creates InfoCard with the extracted data, triggers event for InfoCardManager
+    public void DeserializAndSendReceivedData(string data)
     {
         //get json object in list and deserialize it
         List<JSONData> jsonDataList = JsonConvert.DeserializeObject<List<JSONData>>(data);
@@ -37,26 +34,37 @@ public class JSONDeserializer : MonoBehaviour
         //give infor for name + last name, 
         //only if ID not yet existing
 
-        OnFirstName(jsonData.firstName);
-        OnLastName(jsonData.lastName);
-        OnRole(jsonData.role);
-        OnPlace(jsonData.placeMet);
-        OnID(jsonData.id.ToString());
-        OnID(jsonData.picture);
 
-        Debug.Log("giving strings");
+        //create instance of InfoCard class
+        InfoCardManager.InfoCard infoCard = new InfoCardManager.InfoCard
+        {
+           id = jsonData.id,
+           firstName = jsonData.firstName,
+           lastName = jsonData.lastName,
+           role = jsonData.role,
+           pathToImage = jsonData.picture,
+           placeMet = jsonData.placeMet
+        };
+
+
+        #region
+        //Debug.Log("giving strings");
         Debug.Log("id: " + jsonData.id);
-        Debug.Log("name: " + jsonData.firstName);
-        Debug.Log("picturepath: " + jsonData.picture);
-        Debug.Log("role: " + jsonData.role);
-        Debug.Log("lastname " + jsonData.lastName);
-        Debug.Log("place met" + jsonData.placeMet);
+        //Debug.Log("name: " + jsonData.firstName);
+        //Debug.Log("picturepath: " + jsonData.picture);
+        //Debug.Log("role: " + jsonData.role);
+        //Debug.Log("lastname " + jsonData.lastName);
+        //Debug.Log("place met" + jsonData.placeMet);
+        #endregion
+
+        //trigger event and give it the created instance of an ionfocard with received data
+        OnInfoCardInitialized(infoCard);
     }
 
     //data = list of json objects
     private void HandleDataInput(string data)
     {
         Debug.Log("DATA RECEIVED");
-        OutputReceivedData(data);
+        DeserializAndSendReceivedData(data);
     }
 }

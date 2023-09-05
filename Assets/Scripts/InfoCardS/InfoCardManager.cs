@@ -7,61 +7,57 @@ public class InfoCardManager : MonoBehaviour
 {
 
     public GameObject infoCardPrefab;
-    public Transform infoContainer;
-    public Vector2 initialPosition;
-    [SerializeField] float yOffset;
+    public Transform infoCardContainer;
+
+    InfoCardScript cardScript;
+    GameObject card;
     string name;
     string role;
+    InfoCard testCard;
 
     private void OnEnable()
     {
-        JSONDeserializer.OnFirstName += SetName;
-        JSONDeserializer.OnLastName += SetLastName;
-        JSONDeserializer.OnPicturePath += SetImage;
-        JSONDeserializer.OnPlace += SetPlace;
-        JSONDeserializer.OnID += SetID;
-        JSONDeserializer.OnRole += SetRole;
+        JSONDeserializer.OnInfoCardInitialized += InstantiateInfoCardWithData;
+    }
+    private void OnDisable()
+    {
+        JSONDeserializer.OnInfoCardInitialized -= InstantiateInfoCardWithData;
     }
 
-    private void Start()
-    {
-       initialPosition = new Vector2(276.830017f, 244.5f);
-    }
-    public void RecognizePerson()
+    public void InstantiateInfoCard()
     {
         // Instantiate the info card prefab and set its text values
-        GameObject infoCard = Instantiate(infoCardPrefab, infoContainer);
-        InfoCardScript cardScript = infoCard.GetComponent<InfoCardScript>();
-        cardScript.SetInfo(name, role);
-
-        // Calculate the position for the new card
-        Vector2 newPosition = initialPosition + Vector2.up * (infoContainer.childCount - 1) * yOffset;
-
-        // Set the calculated position for the new card
-        infoCard.transform.localPosition = newPosition;
+        card = Instantiate(infoCardPrefab, infoCardContainer);
+        cardScript = card.GetComponent<InfoCardScript>();
+        cardScript.SetInfo("Jane", "Doe", "static/employee_pics/WIN_20230904_13_22_51_Pro.jpg");
     }
 
-    private void SetName(string name)
+    public class InfoCard
     {
-
+        public int id;
+        public string firstName;
+        public string lastName;
+        public string role;
+        public string pathToImage;
+        public string placeMet;
     }
-       private void SetLastName(string lastName)
-    {
 
+    public void InstantiateInfoCardWithData(InfoCard infoCard)
+    {
+        Debug.Log("I Am called with infocard: " + infoCard.id);
+        testCard = infoCard;
+        InstantiateInfoCard();
+        Debug.Log("I Am called with infocard: " + infoCard.firstName);
+        if (infoCard != null)
+        {
+            Debug.Log("received infocard: " + infoCard.firstName + "" + infoCard.lastName);
+            cardScript.SetInfo(infoCard.firstName + "" + infoCard.lastName, infoCard.role, infoCard.pathToImage);
+        }
+        else
+        {
+            cardScript.SetInfo("nothing", "atall", "static/employee_pics/WIN_20230904_13_22_51_Pro.jpg");
+        }
     }
-       private void SetPlace(string place)
-    {
 
-    }
-       private void SetImage(string imagePath)
-    {
-
-    }       private void SetRole(string role)
-    {
-
-    }       private void SetID(string id)
-    {
-
-    }
 
 }
