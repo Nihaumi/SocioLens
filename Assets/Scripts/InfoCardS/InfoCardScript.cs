@@ -7,7 +7,6 @@ public class InfoCardScript : MonoBehaviour
     private TextMeshPro name;
     private TextMeshPro role;
 
-
     private void Start()
     {
         name = gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshPro>();

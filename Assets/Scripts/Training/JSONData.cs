@@ -4,15 +4,6 @@ using UnityEngine;
 [System.Serializable]
 public class JSONData
 {
-    [JsonProperty("employee_id")]
-    public string id;
-
-    [JsonProperty("firstname")]
-    public string firstName;
-
-    [JsonProperty("role")]
-    public string role;
-
     [JsonProperty("place_met")]
     public string placeMet;
 
@@ -21,4 +12,12 @@ public class JSONData
 
     [JsonProperty("picture")]
     public string picture;
+    [JsonProperty("firstname")]
+    public string firstName;
+
+    [JsonProperty("employee_id")]
+    public int id;
+
+    [JsonProperty("role")]
+    public string role;
 }
