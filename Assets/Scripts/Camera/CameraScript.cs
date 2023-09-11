@@ -59,7 +59,8 @@ namespace csharp_client
             else    // Start the camera
             {
                 WebCamDevice device = WebCamTexture.devices[currentCamIndex];
-                tex = new WebCamTexture(device.name);
+                tex = new WebCamTexture(device.name, 1280, 720, 1);
+                //tex = new WebCamTexture(device.name);
                 display.texture = tex;
                 camText.text = device.name;
                 tex.Play();

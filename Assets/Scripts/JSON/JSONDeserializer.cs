@@ -46,15 +46,15 @@ public class JSONDeserializer : MonoBehaviour
            placeMet = jsonData.placeMet
         };
 
-
+        //extraction Logs
         #region
-        //Debug.Log("giving strings");
+        Debug.Log("giving strings");
         Debug.Log("id: " + jsonData.id);
-        //Debug.Log("name: " + jsonData.firstName);
-        //Debug.Log("picturepath: " + jsonData.picture);
-        //Debug.Log("role: " + jsonData.role);
-        //Debug.Log("lastname " + jsonData.lastName);
-        //Debug.Log("place met" + jsonData.placeMet);
+        Debug.Log("name: " + jsonData.firstName);
+        Debug.Log("picturepath: " + jsonData.picture);
+        Debug.Log("role: " + jsonData.role);
+        Debug.Log("lastname " + jsonData.lastName);
+        Debug.Log("place met" + jsonData.placeMet);
         #endregion
 
         //trigger event and give it the created instance of an ionfocard with received data
