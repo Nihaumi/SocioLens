@@ -10,7 +10,7 @@ using UnityEngine.Windows.WebCam;
 
 namespace csharp_client
 {
-    
+
     public class CameraScript : MonoBehaviour
     {
         //TODO use hololens cam instead of webcam
@@ -56,19 +56,20 @@ namespace csharp_client
                 startStopText.text = "Start Camera";
 
             }
-            else    // Start the camera
+            else    // Start the camera, witgh lowr image resolution
             {
                 WebCamDevice device = WebCamTexture.devices[currentCamIndex];
-                tex = new WebCamTexture(device.name);
+                tex = new WebCamTexture(device.name, 1280, 720, 1);
                 display.texture = tex;
                 camText.text = device.name;
                 tex.Play();
                 startStopText.text = "Stop Camera";
 
                 //open Websocket-Connection
-                
+
                 ws = new WebSocket("ws://127.0.0.1:8000/ws");
-                ws.OnMessage += (sender, e) => {
+                ws.OnMessage += (sender, e) =>
+                {
                     if (e.IsText)
                     {
                         //TODO event send to desirializer
