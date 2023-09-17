@@ -16,7 +16,6 @@ public class InfoCardScript : MonoBehaviour
     private void Start()
     {
         ReferenceInfoCardComponents();
-        LoadImage();
     }
     public void SetInfo(string name, string role, string pathToImage)
     {

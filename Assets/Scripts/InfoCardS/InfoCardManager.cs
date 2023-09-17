@@ -10,10 +10,10 @@ public class InfoCardManager : MonoBehaviour
     public Transform infoCardContainer;
 
     InfoCardScript cardScript;
-    GameObject card;
-    string name;
-    string role;
-    InfoCard testCard;
+   [SerializeField] private GameObject card;
+
+    //list of InfoCards
+    [SerializeField] private List<int> idList = new List<int>();
 
     private void OnEnable()
     {
@@ -29,7 +29,7 @@ public class InfoCardManager : MonoBehaviour
         // Instantiate the info card prefab and set its text values
         card = Instantiate(infoCardPrefab, infoCardContainer);
         cardScript = card.GetComponent<InfoCardScript>();
-        cardScript.SetInfo("Jane", "Doe", "static/employee_pics/WIN_20230904_13_22_51_Pro.jpg");
+        cardScript.SetInfo("Jane Doe", "staff", "static/employee_pics/WIN_20230904_13_22_51_Pro.jpg");
     }
 
     public class InfoCard
@@ -50,13 +50,19 @@ public class InfoCardManager : MonoBehaviour
         if (infoCard != null)
         {
             Debug.Log("received infocard: " + infoCard.firstName + "" + infoCard.lastName);
-            card = Instantiate(infoCardPrefab, infoCardContainer);
-            cardScript.SetInfo(infoCard.firstName + "" + infoCard.lastName, infoCard.role, infoCard.pathToImage);
+            StoreDataInInfocard(infoCard.id);
+            card.GetComponent<InfoCardScript>().SetInfo(infoCard.firstName + infoCard.lastName, infoCard.role, infoCard.pathToImage);
+            //cardScript.SetInfo(infoCard.firstName + "" + infoCard.lastName, infoCard.role, infoCard.pathToImage);
         }
         else
         {
             cardScript.SetInfo("nothing", "atall", "static/employee_pics/WIN_20230904_13_22_51_Pro.jpg");
         }
+    }
+
+    private void StoreDataInInfocard(int id)
+    {
+        //check if id is already active
     }
 
 
