@@ -72,7 +72,7 @@ namespace csharp_client
                 {
                     if (e.IsText)
                     {
-                        //TODO event send to desirializer
+                        //event sends data to desirializer
                         Debug.Log("SERVER SAYS: " + e.Data);
                         OnReceivedData(e.Data);
                     }

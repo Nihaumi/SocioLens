@@ -6,8 +6,6 @@ using csharp_client;
 
 public class JSONDeserializer : MonoBehaviour
 {
-    //extract all json object from list -> make each an object person?
-    //deserialize json stuff
 
     //event
     public delegate void InfoCard(InfoCardManager.InfoCard infoCard);
@@ -30,11 +28,6 @@ public class JSONDeserializer : MonoBehaviour
         List<JSONData> jsonDataList = JsonConvert.DeserializeObject<List<JSONData>>(data);
         JSONData jsonData = jsonDataList[0];
 
-        //trigger event for infocard
-        //give infor for name + last name, 
-        //only if ID not yet existing
-
-
         //create instance of InfoCard class
         InfoCardManager.InfoCard infoCard = new InfoCardManager.InfoCard
         {
@@ -46,10 +39,9 @@ public class JSONDeserializer : MonoBehaviour
            placeMet = jsonData.placeMet
         };
 
-
         #region
         //Debug.Log("giving strings");
-        Debug.Log("id: " + jsonData.id);
+        //Debug.Log("id: " + jsonData.id);
         //Debug.Log("name: " + jsonData.firstName);
         //Debug.Log("picturepath: " + jsonData.picture);
         //Debug.Log("role: " + jsonData.role);
@@ -61,7 +53,6 @@ public class JSONDeserializer : MonoBehaviour
         OnInfoCardInitialized(infoCard);
     }
 
-    //data = list of json objects
     private void HandleDataInput(string data)
     {
         Debug.Log("DATA RECEIVED");

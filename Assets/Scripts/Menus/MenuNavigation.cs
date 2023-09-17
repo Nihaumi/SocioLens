@@ -8,9 +8,9 @@ public class MenuNavigation : MonoBehaviour
 
     //Menu Texts
     string menuText1 = "SocioLens can recognize the Faces of your coworkers Here is how it works:";
-    string menuText2 = "The Recognition Process will be started when you look at a colleaguegs. ";
-    string menuText3 = "The name, role and time and place of the last encounter for this person will be displayed.";
-    string menuText4 = "Click on the Information to minimize or maximize it again.";
+    string menuText2 = "Look at your palm to show a hand menu.";
+    string menuText3 = "The Recognition Process will be started by using the start camera button. ";
+    string menuText4 = "The name, role and time and place of the last encounter of recognized people will be displayed.";
     string menuText5 = "Have a fun time socializing!";
     //counter for pagenumbers
     private int counter = 1;
@@ -26,12 +26,13 @@ public class MenuNavigation : MonoBehaviour
         ShowTutorial();
         SetPagination();
     }
-
+    //displays current page out of max number of pages
     private void SetPagination()
     {
         pagination.text = counter + "/" + numberOfMenuTexts;
     }
 
+    //showsprevious page
     public void Previous()
     {
         Debug.Log("End Touch");
@@ -39,6 +40,7 @@ public class MenuNavigation : MonoBehaviour
         ChangeMenuText();
     }
 
+    //shows next page
     public void Next()
     {
         Debug.Log("End Touch");
@@ -46,6 +48,7 @@ public class MenuNavigation : MonoBehaviour
         ChangeMenuText();
     }
 
+    //deactivates the tutorial
     public void EndTutorial()
     {
         counter = 1;
@@ -53,6 +56,7 @@ public class MenuNavigation : MonoBehaviour
         tutorialCanvas.SetActive(false);
     }
 
+    //activates tutorial
     public void ShowTutorial()
     {
         counter = 1;
@@ -61,7 +65,7 @@ public class MenuNavigation : MonoBehaviour
         tutorialCanvas.SetActive(true);
     }
 
-
+    //shows/hides tutorial, resets tutorial to page 1
     public void ToggleTutorial()
     {
         counter = 1;
@@ -76,6 +80,7 @@ public class MenuNavigation : MonoBehaviour
         }
     }
 
+    // displays text according to current page
     private void ChangeMenuText()
     {
         if (counter < 1)

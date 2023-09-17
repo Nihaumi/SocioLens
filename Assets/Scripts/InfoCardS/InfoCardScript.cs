@@ -37,7 +37,6 @@ public class InfoCardScript : MonoBehaviour
         //load image from path as texture for the raw image in info card
         //get absolute path to kp-mci project, the second part including image name comes with JSON from server
         imagePath = "D:/Uni/SoS23/MCI/kp-mci/";
-        //imagePath = "../../../../kp-mci/";
         if (imagePathPart2 == null || imagePathPart2 == "")
         {
             imagePathPart2 = "static/employee_pics/WIN_20230904_13_22_51_Pro.jpg";
